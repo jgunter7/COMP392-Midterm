@@ -52,17 +52,18 @@ var game = (() => {
     var cube3 : Mesh;
     var cube4 : Mesh;
     var cube5 : Mesh;
+    // my array of colours - jgunter
     var possibleColors = [
+        new LambertMaterial({color:0XFF888F}),
+        new LambertMaterial({color:0XFF1FFF}),
         new LambertMaterial({color:0XFF8700}),
-        new LambertMaterial({color:0xffaa11}),
-        new LambertMaterial({color:0x11ee66}),
         new LambertMaterial({color:0xf12396}),
         new LambertMaterial({color:0xfff116}),
-        new LambertMaterial({color:0xaaabb6}),
-        new LambertMaterial({color:0xff6226}),
-        new LambertMaterial({color:0xf12366}),
-        new LambertMaterial({color:0xa77896}),
-        new LambertMaterial({color:0xffff99})
+        new LambertMaterial({color:0XFF001F}),
+        new LambertMaterial({color:0xdd6226}),
+        new LambertMaterial({color:0xbbb666}),
+        new LambertMaterial({color:0x111111}),
+        new LambertMaterial({color:0XF11FFF})
     ];
         
     function init() {
@@ -84,6 +85,7 @@ var game = (() => {
     
         AddMyObjects();
         
+        //spot light pointing accross scene with these points :)
         var spotLight = new THREE.SpotLight(0xffffff);
         spotLight.position.set(-40,50,10);
         spotLight.lookAt(scene.position);
@@ -115,6 +117,7 @@ var game = (() => {
     gui.add(controlObject, 'cube4Speed', -0.5, 0.5);
     gui.add(controlObject, 'rotateCube5', false);
     gui.add(controlObject, 'cube5Speed', -0.5, 0.5);
+    //gui.add(controlObject, 'ChangeColours');
     }
 
     function addStatsObject() {
@@ -130,7 +133,7 @@ var game = (() => {
     function gameLoop(): void {
         stats.update();
         
-        // add stuff here for updating
+        // add stuff here for updating liek rortations
         if (control.rotateCube1) {
             cube1.rotation.z += control.cube1Speed;
         }
@@ -188,7 +191,7 @@ var game = (() => {
 	
 	scene.add(plane);
     
-    
+    //add cube 1 (bottom)
     cube1 = new THREE.Mesh(
     new CubeGeometry(10,10,2),
     new LambertMaterial({color:0XFF1FFF}));
@@ -237,6 +240,7 @@ var game = (() => {
     cube4.material = possibleColors[getRandomInt(0,9)];
     scene.add(cube4);
     
+    //add cube5 (top) a lil different
     cube5 = new THREE.Mesh(
     new CubeGeometry(2,2,10),
     new LambertMaterial({color:0XFF1FFF}));
@@ -250,9 +254,14 @@ var game = (() => {
     scene.add(cube5);
     }
     
+    // returns random number between and including max and min
     function getRandomInt(min, max) : number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function getRandomHex() : string {
+        return '0x' + Math.floor(Math.random()*16777215).toString(16);
+    }
+    
 
     window.onload = init;
 

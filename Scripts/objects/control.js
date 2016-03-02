@@ -1,4 +1,10 @@
 /// <reference path="../../typings/tsd.d.ts"/>
+/*
+Author:             Jason Gunter
+Last Modified By:   Jason Gunter @ March 2, 2016
+Description:        Midterm
+Revision History:   https://github.com/jgunter7/COMP392-Midterm
+*/
 var objects;
 (function (objects) {
     // CONTROL CLASS ++++++++++++++++++++++++++++++++++++++++++
